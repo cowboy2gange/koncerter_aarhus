@@ -2,6 +2,12 @@
 
 @include 'config.php';
 
+session_start();
+
+if(!isset($_SESSION['user_name'])){
+   header('location:login_form.php');
+}
+
 if(isset($_POST['submit'])){
 
     $artist = mysqli_real_escape_string($conn, $_POST['artist']);
@@ -11,8 +17,9 @@ if(isset($_POST['submit'])){
     mysqli_query($conn, $insert);
     header('location:login_form.php');
 
-};
 
+
+};
 
 ?>
 
@@ -42,8 +49,8 @@ if(isset($_POST['submit'])){
       };
       ?>
       <input type="text" name="artist" required placeholder="enter artist name">
-      <input type="date" name="date" required placeholder="enter date">
-      <input type="location" name="location">
+      <input type="date" name="date" >
+      <input type="text" name="bar_name", value="<?php echo (isset($_SESSION['user_name']))?$_SESSION['user_name']:'';?>">
 
       <input type="submit" name="submit" value="register concert" class="form-btn">
       <!-- <p>already have an account? <a href="login_form.php">login now</a></p> -->
