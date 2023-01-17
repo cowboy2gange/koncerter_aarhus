@@ -6,7 +6,8 @@ if(isset($_POST['submit'])){
 
     $artist = mysqli_real_escape_string($conn, $_POST['artist']);
     $date = mysqli_real_escape_string($conn, $_POST['date']);
-    $insert = "INSERT INTO submitted_music(artist, date) VALUES('$artist','$date')";
+    $bar = mysqli_real_escape_string($conn, $_POST['bar_name']);
+    $insert = "INSERT INTO submitted_music(artist, date, bar_name) VALUES('$artist','$date','$bar')";
     mysqli_query($conn, $insert);
     header('location:login_form.php');
 
@@ -42,6 +43,7 @@ if(isset($_POST['submit'])){
       ?>
       <input type="text" name="artist" required placeholder="enter artist name">
       <input type="date" name="date" required placeholder="enter date">
+      <input type="location" name="location">
 
       <input type="submit" name="submit" value="register concert" class="form-btn">
       <!-- <p>already have an account? <a href="login_form.php">login now</a></p> -->
